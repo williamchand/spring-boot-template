@@ -4,6 +4,7 @@ import com.dailycodebuffer.demo.controller.DepartmentController;
 import com.dailycodebuffer.demo.entity.Department;
 import com.dailycodebuffer.demo.error.DepartmentNotFoundException;
 import com.dailycodebuffer.demo.repository.DepartmentRepository;
+import com.dailycodebuffer.demo.utils.AppUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,17 +50,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department updateDepartment(Long departmentId, Department department) {
         Department depDB = departmentRepository.findById(departmentId).get();
 
-        if(Objects.nonNull(department.getDepartmentName()) &&
-                !"".equalsIgnoreCase(department.getDepartmentName())) {
+        if(AppUtils.validateStringNonNull(department.getDepartmentName())) {
             depDB.setDepartmentName(department.getDepartmentName());
         }
 
-        if(Objects.nonNull(department.getDepartmentCode()) &&
-                !"".equalsIgnoreCase(department.getDepartmentCode())) {
+        if(AppUtils.validateStringNonNull(department.getDepartmentCode())) {
             depDB.setDepartmentCode(department.getDepartmentCode());
         }
-        if(Objects.nonNull(department.getDepartmentAddress()) &&
-                !"".equalsIgnoreCase(department.getDepartmentAddress())) {
+
+        if(AppUtils.validateStringNonNull(department.getDepartmentAddress())) {
             depDB.setDepartmentAddress(department.getDepartmentAddress());
         }
 
