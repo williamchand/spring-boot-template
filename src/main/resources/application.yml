@@ -1,0 +1,53 @@
+server:
+  port: '8082'
+spring:
+  profiles:
+    active: qa
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: learnuser
+    url: jdbc:postgresql://localhost:5433/learndb
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+---
+
+spring:
+  profiles: qa
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: learnuser
+    url: jdbc:postgresql://localhost:5433/learndb
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+---
+
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: learnuser
+    url: jdbc:postgresql://localhost:5433/learndb
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
